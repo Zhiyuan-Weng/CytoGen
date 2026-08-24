@@ -1,0 +1,60 @@
+round_index: 0
+output_root: ../outputs/iterations
+real_dataset: /path/to/prepared_real_dataset
+split: train
+
+stages:
+  inference:
+    enabled: false
+    command:
+      - /path/to/downstream/environment/bin/python
+      - /path/to/export_predictions.py
+      - --dataset
+      - ${real_dataset}
+      - --output_dir
+      - ${raw_predictions_dir}
+    env:
+      CUDA_VISIBLE_DEVICES: "0"
+    expected_outputs:
+      - ${raw_predictions_dir}
+
+  predictions:
+    args:
+      format: cellpose
+      predictions: ${raw_predictions_dir}
+
+  controller:
+    args:
+      epochs: 500
+      device: cpu
+
+  layouts:
+    args:
+      num_layouts: 2601
+      height: 512
+      width: 512
+
+  rendering:
+    args:
+      pretrained_model_name_or_path: /path/to/target_appearance_checkpoint
+      controlnet_path: /path/to/controlnet_checkpoint/controlnet
+      batch_size: 4
+      device: cuda
+    env:
+      CUDA_VISIBLE_DEVICES: "0"
+
+  downstream:
+    args:
+      format: cellpose
+      segmentation_task: whole_cell
+      synthetic_ratio: 1.0
+
+  training:
+    enabled: false
+    command:
+      - /path/to/downstream/environment/bin/python
+      - /path/to/train_segmenter.py
+      - --train_dir
+      - ${downstream_dir}
+    env:
+      CUDA_VISIBLE_DEVICES: "0"

@@ -1,0 +1,2 @@
+{"sample_id":"example_0001","split":"train","image":"data/train/example_0001.tif","mask":"data/train/example_0001_masks.tif","category":"example_category","text":"Grayscale microscopy image of example cells"}
+{"sample_id":"example_0002","split":"train","image":"data/train/example_0002.tif","mask":"data/train/example_0002_whole_cell_masks.tif","nuclear_mask":"data/train/example_0002_nuclear_masks.tif","category":"example_tissue_example_platform","text":"Fluorescence microscopy image with whole-cell and nuclear markers"}

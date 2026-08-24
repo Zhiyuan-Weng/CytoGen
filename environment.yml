@@ -1,0 +1,31 @@
+name: cytogen
+
+channels:
+  - defaults
+
+dependencies:
+  - python=3.11.14
+  - pip=25.3
+  - pip:
+      - --extra-index-url https://download.pytorch.org/whl/cu128
+      - torch==2.9.1+cu128
+      - torchvision==0.24.1+cu128
+      - xformers==0.0.33.post2
+      - diffusers==0.35.2
+      - transformers==4.57.3
+      - accelerate==1.12.0
+      - datasets==4.4.1
+      - huggingface-hub==0.36.0
+      - safetensors==0.7.0
+      - numpy==2.2.6
+      - numba==0.64.0
+      - scipy==1.16.3
+      - pillow==11.3.0
+      - opencv-python==4.12.0.88
+      - pycocotools==2.0.10
+      - scikit-image==0.26.0
+      - tifffile==2025.12.20
+      - networkx==3.5
+      - tensorboard==2.20.0
+      - tqdm==4.67.1
+      - pyyaml==6.0.3
